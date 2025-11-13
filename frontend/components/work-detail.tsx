@@ -21,7 +21,7 @@ export default async function BlogDetail({ postId }: { postId: string }) {
 let post: WorkPost| null = null
   
   try {
-    const res = await fetch(`http://localhost:5000/works/${postId}`, {
+    const res = await fetch(`https://main-portfolio-app-backend.onrender.com/works/${postId}`, {
       next: { revalidate: 1 }
     })
 

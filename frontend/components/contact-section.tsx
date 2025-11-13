@@ -31,7 +31,7 @@ export default function ContactSection() {
   const handleSubmit =async (e: React.FormEvent) => {
     e.preventDefault()
 setSubmitted(true)
-    const response = await fetch('http://localhost:5000/contact', { 
+    const response = await fetch('https://main-portfolio-app-backend.onrender.com/contact', { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -14,7 +14,7 @@ interface BlogPostsResponse{
 }
 export default async function BlogSection() {
 
-  const res=await fetch('http://localhost:5000/blog-posts/',{
+  const res=await fetch('https://main-portfolio-app-backend.onrender.com/blog-posts/',{
 
     next:{revalidate:300},
     

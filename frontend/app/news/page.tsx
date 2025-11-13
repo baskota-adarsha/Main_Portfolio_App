@@ -30,7 +30,7 @@ export default async function NewsPage({
 }) {
   const search = (await searchParams).search || ''
   
-  const res = await fetch(`http://localhost:5000/news?search=${search}`, {
+  const res = await fetch(`https://main-portfolio-app-backend.onrender.com/news?search=${search}`, {
     next: { revalidate: 60 },
    
   })

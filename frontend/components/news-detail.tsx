@@ -6,7 +6,7 @@ export default async function NewsDetail({ id }: { id: string }) {
   let article:NewsPost | null = null
   
   try {
-    const res = await fetch(`http://localhost:5000/news/${id}`, {
+    const res = await fetch(`https://main-portfolio-app-backend.onrender.com/news/${id}`, {
       next: { revalidate: 1 }
     })
 

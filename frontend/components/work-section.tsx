@@ -14,7 +14,7 @@ interface WorkPostsResponse{
 }
 export default async function WorkSection() {
 
-  const res =await fetch ('http://localhost:5000/works',{
+  const res =await fetch ('https://main-portfolio-app-backend.onrender.com/works',{
 
     next:{revalidate:1}
   })
