@@ -456,3 +456,13 @@ export const getNewsDetail = async (req: Request, res: Response) => {
     res.status(404).json({ error: error.message })
   }
 }
+export const getSchedulerStatus = async (req: Request, res: Response) => {
+  res.status(200).json({
+    isRunning: true,
+    lastExecution: lastExecution,
+    nextExecution: scheduledTask ? scheduledTask.nextDate().toISOString() : null,
+    executionHistory: executionHistory,
+    timezone: 'UTC',
+    schedule: '00:00 and 12:00 daily'
+  });
+};
