@@ -7,8 +7,8 @@ import { getNews, getNewsDetail, manualPostRefresh,getSchedulerStatus } from '..
 const router = Router();
 
 router.get('/fetch-and-save',manualPostRefresh)
-router.get('/:id',getNewsDetail)
+
 router.get('/',getNews)
 router.get('/scheduler-status', getSchedulerStatus);
-
+router.get('/:id',getNewsDetail)
 export default router;
