@@ -355,7 +355,7 @@ export const fetchPostsAndSave = async (
 
 // Store the cron task reference and execution history
 let scheduledTask: any = null;
-let lastExecution: Date | null = null;
+let lastExecution: any = null;  // ✅ Add proper type
 let executionHistory: Array<{
   timestamp: Date;
   success: boolean;
@@ -457,12 +457,40 @@ export const getNewsDetail = async (req: Request, res: Response) => {
   }
 }
 export const getSchedulerStatus = async (req: Request, res: Response) => {
-  res.status(200).json({
-    isRunning: true,
-    lastExecution: lastExecution,
-    nextExecution: scheduledTask ? scheduledTask.nextDate().toISOString() : null,
-    executionHistory: executionHistory,
-    timezone: 'UTC',
-    schedule: '00:00 and 12:00 daily'
-  });
+  try {
+    const now = new Date();
+    const currentHour = now.getUTCHours();
+    
+    let nextExecution: string;
+    if (currentHour < 12) {
+      nextExecution = `Today at 12:00 UTC`;
+    } else {
+      nextExecution = `Tomorrow at 00:00 UTC`;
+    }
+    
+    res.status(200).json({
+      status: 'running',
+      scheduler: {
+        isActive: scheduledTask !== null,
+        pattern: '0 0,12 * * *',
+        timezone: 'UTC',
+        description: 'Runs every day at 00:00 and 12:00 UTC',
+        nextExecution: nextExecution
+      },
+      execution: {
+        lastRun: lastExecution ? lastExecution.toISOString() : 'Never',  // ✅ Now works
+        history: executionHistory.slice(0, 5)
+      },
+      server: {
+        currentTime: now.toISOString(),
+        uptime: `${Math.floor(process.uptime() / 3600)}h ${Math.floor((process.uptime() % 3600) / 60)}m`,
+        uptimeSeconds: Math.floor(process.uptime())
+      }
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      status: 'error',
+      message: error.message
+    });
+  }
 };
