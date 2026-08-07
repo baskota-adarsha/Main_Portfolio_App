@@ -1,52 +1,46 @@
-
-
-import Link from "next/link"
-import { ArrowLeft,ExternalLink} from "lucide-react"
-
+import Link from "next/link";
+import { ArrowLeft, ExternalLink } from "lucide-react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 interface WorkPost {
-  id: number
-  title: string
-  excerpt: string
-  image: string
+  id: number;
+  title: string;
+  excerpt: string;
+  image: string;
 
-  content: string
-  project_link:string
-
+  content: string;
+  project_link: string;
 }
 interface WorkPostResponse {
-  post:WorkPost
+  post: WorkPost;
 }
 
 export default async function BlogDetail({ postId }: { postId: string }) {
-let post: WorkPost| null = null
-  
-  try {
-    const res = await fetch(`https://main-portfolio-app-backend.onrender.com/works/${postId}`, {
-      next: { revalidate: 1 }
-    })
+  let post: WorkPost | null = null;
 
+  try {
+    const res = await fetch(
+      `https://main-portfolio-app-backend.onrender.com/works/${postId}`,
+      {
+        next: { revalidate: 1 },
+      },
+    );
 
     // Check if response is OK
     if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`)
+      throw new Error(`HTTP error! status: ${res.status}`);
     }
 
-    const data:WorkPostResponse = await res.json()
+    const data: WorkPostResponse = await res.json();
 
-    post = data.post // This matches your API response structure
-
-  } catch (error:any) {
-    throw new Error(error.message || "Failed to load blog work posts")
-
+    post = data.post; // This matches your API response structure
+  } catch (error: any) {
+    throw new Error(error.message || "Failed to load blog work posts");
   }
-    
-  
-
 
   if (!post) {
-    throw new Error("Work post not found or empty response")
+    throw new Error("Work post not found or empty response");
   }
-
 
   return (
     <section className="py-12 md:py-20 px-4 sm:px-6 lg:px-8">
@@ -59,9 +53,9 @@ let post: WorkPost| null = null
           <ArrowLeft size={20} />
           Back to Work
         </Link>
-<h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 md:mb-8 leading-tight">
-  {post.title}
-</h1>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 md:mb-8 leading-tight">
+          {post.title}
+        </h1>
         {/* Featured Image */}
         <div className="mb-12 md:mb-18">
           <img
@@ -84,20 +78,14 @@ let post: WorkPost| null = null
             </a>
           </div>
         )}
-   
-       
-        {/* Post Content */}
-        <article className="prose prose-lg max-w-none mb-12 md:mb-16">
-          {post.content.split("\n\n").map((paragraph, index) => (
-            <p key={index} className="text-gray-700 leading-relaxed mb-6 text-base md:text-lg">
-              {paragraph}
-            </p>
-          ))}
-        </article>
 
-    
-   
+        {/* Post Content */}
+        <article className="prose prose-teal prose-lg max-w-none mb-12 md:mb-16">
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            {post.content}
+          </ReactMarkdown>
+        </article>
       </div>
     </section>
-  )
+  );
 }
