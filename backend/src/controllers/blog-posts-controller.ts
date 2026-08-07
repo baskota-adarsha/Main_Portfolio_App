@@ -25,7 +25,7 @@ export const getBlogPost = async (req: Request, res: Response) => {
 export const getWorks = async (req: Request, res: Response) => {
   const { data, error } = await supabase
     .from('works')
-    .select('id ,title ,excerpt, image')
+    .select('id ,title ,excerpt, image,sort_order')
     .order('sort_order', { ascending: true });
   if (error) res.status(400).json({ error: error.message });
   else res.status(200).json({ posts: data });
