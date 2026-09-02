@@ -5,6 +5,7 @@ import {
   Server,
   Cloud,
   Wrench,
+  GitBranch,
 } from "lucide-react";
 
 export default function AboutSection() {
@@ -13,6 +14,11 @@ export default function AboutSection() {
       category: "Data & Analytics",
       icon: Database,
       items: "SQL, PostgreSQL, MySQL, Python, Power BI, Excel, DAX",
+    },
+    {
+      category: "Data Engineering",
+      icon: GitBranch,
+      items: "dbt, Apache Airflow, ETL pipelines, Python",
     },
     {
       category: "Frontend Development",
@@ -50,16 +56,16 @@ export default function AboutSection() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-teal-600">
             About
           </h2>
-
           <p className="text-gray-800 text-base sm:text-lg leading-relaxed">
-            Hello, I'm Adarsha Baskota — a CS student and aspiring data engineer
-            passionate about turning raw data into clear, actionable insights
-            using SQL, Python, and Power BI. I pair that with a full-stack
-            foundation in React, Next.js, Express, and MongoDB, so I can build
-            the pipelines, dashboards, and applications around the data itself.
-            Here are some of the technologies I've worked with:
+            Hello, I'm Adarsha Baskota — a CS student and aspiring data
+            analyst and data engineer passionate about turning raw data into
+            clear, actionable insights using SQL, Python, Excel, and Power BI
+            — and building the pipelines that feed them with dbt and Airflow.
+            I pair that with a full-stack foundation in React, Next.js,
+            Express, and MongoDB, so I can build the pipelines, dashboards,
+            and applications around the data itself. Here are some of the
+            technologies I've worked with:
           </p>
-
           <div className="grid sm:grid-cols-2 gap-6 pt-2">
             {technologies.map((tech, index) => {
               const Icon = tech.icon;
