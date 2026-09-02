@@ -28,9 +28,7 @@ export default function Hero() {
 
           {/* Description */}
           <p className="text-gray-700 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed">
-            Aspiring data analyst who works with SQL, Python,Excel, and Power BI
-            to turn raw data into insights — with a full-stack foundation in
-            React, Next.js, Express, and MongoDB to build the tools around it.
+            Aspiring data analyst and data engineer who turns raw data into insights using SQL, Python, Excel, and Power BI — and builds the pipelines that feed them with dbt and Airflow. Backed by a full-stack foundation in React, Next.js, Express, MongoDB, PostgreSQL, MySQL to build the tools around it all.
           </p>
 
           {/* CTA Buttons */}
