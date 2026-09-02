@@ -29,7 +29,7 @@ export default function AboutSection() {
     {
       category: "Backend & Databases",
       icon: Server,
-      items: "Node.js, Express.js, MongoDB, Mongoose, Firebase, Supabase",
+      items: "Node.js, Express.js, PostgreSQL,MySQL ,MongoDB, Mongoose, Firebase, Supabase",
     },
     {
       category: "APIs & Tooling",
